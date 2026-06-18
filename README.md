@@ -1,4 +1,3 @@
-# TalentIQ-AI
 # TalentIQ AI
 
 AI-powered Talent Intelligence Platform built for the Data & AI Challenge.
