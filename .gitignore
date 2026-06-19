@@ -36,3 +36,6 @@ build/
 
 # Dataset cache
 *.pkl
+
+dataset/*
+!dataset/.gitkeep
