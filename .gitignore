@@ -39,3 +39,27 @@ build/
 
 dataset/*
 !dataset/.gitkeep
+backend/data/indexes/
+backend/data/metadata/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Vector indexes
+backend/indexes/
+backend/metadata/
+
+# React
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.vscode/
+.DS_Store
+Thumbs.db

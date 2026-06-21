@@ -45,3 +45,13 @@ Implemented the Embedding Service.
 - Singleton model loading
 - Reusable across retrieval and ranking
 
+
+## Sprint 3.2 – Phase 2
+
+Implemented the FAISS Vector Store.
+
+Features:
+- Add embeddings
+- Semantic search
+- Save/load index
+- Inner Product search using normalized embeddings
