@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   TextField,
   Button,
@@ -21,9 +21,13 @@ interface SearchBarProps {
     openToWork: boolean,
     analyze: boolean
   ) => void;
+   loading: boolean;
 }
 
-function SearchBar({ onSearch }: SearchBarProps) {
+function SearchBar({
+  onSearch,
+  loading,
+}: SearchBarProps){
   const [query, setQuery] = useState("");
   const [topK, setTopK] = useState(5);
   const [minExperience, setMinExperience] = useState<number | "">("");
@@ -119,25 +123,32 @@ function SearchBar({ onSearch }: SearchBarProps) {
       <Button
     variant="contained"
     size="large"
+    disabled={loading}
     sx={{
         px: 5,
         height: 56,
         borderRadius: 2,
     }}
-
-        onClick={() =>
-  onSearch(
-    query,
-    topK,
-    minExperience === "" ? null : minExperience,
-    maxNotice === "" ? null : maxNotice,
-    openToWork,
-    analyze
-  )
-}
-      >
-        Search
-      </Button>
+    onClick={() =>
+        onSearch(
+            query,
+            topK,
+            minExperience === "" ? null : minExperience,
+            maxNotice === "" ? null : maxNotice,
+            openToWork,
+            analyze
+        )
+    }
+>
+    {loading ? (
+        <CircularProgress
+            size={24}
+            color="inherit"
+        />
+    ) : (
+        "Search"
+    )}
+</Button>
     </Stack>
   );
 }

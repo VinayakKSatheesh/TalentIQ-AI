@@ -14,9 +14,10 @@ import SearchBar from "../components/SearchBar";
 import CandidateCard from "../components/CandidateCard";
 import api from "../api/talentiq";
 import type { Candidate } from "../types/search";
-
+import DashboardStats from "../components/DashboardStats";
 function Dashboard() {
   const [results, setResults] = useState<Candidate[]>([]);
+  const [loading, setLoading] = useState(false);
   const [selectedCandidate, setSelectedCandidate] =
     useState<Candidate | null>(null);
 
@@ -31,6 +32,7 @@ const [dialogOpen, setDialogOpen] =
   analyze: boolean
 ) => {
     try {
+      setLoading(true);
       const response = await api.post("/search", {
   query,
   top_k: topK,
@@ -44,9 +46,14 @@ const [dialogOpen, setDialogOpen] =
       console.log(response.data.results);
 
       setResults(response.data.results);
-    } catch (error) {
-      console.error(error);
-    }
+      setLoading(false);
+    } 
+    catch (error) {
+    console.error(error);
+
+} finally {
+    setLoading(false);
+}
   };
   const handleViewProfile = (
     candidate: Candidate
@@ -92,9 +99,14 @@ const [dialogOpen, setDialogOpen] =
           </Typography>
 
           <Box sx={{ mt: 4 }}>
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar
+    onSearch={handleSearch}
+    loading={loading}
+/>
           </Box>
-
+        {results.length > 0 && (
+  <DashboardStats results={results} />
+)}
           <Alert
     severity="info"
     sx={{
