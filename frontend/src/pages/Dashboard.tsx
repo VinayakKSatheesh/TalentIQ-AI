@@ -9,7 +9,7 @@ import {
   Alert,
   Box,
 } from "@mui/material";
-
+import CandidateDialog from "../components/CandidateDialog";
 import SearchBar from "../components/SearchBar";
 import CandidateCard from "../components/CandidateCard";
 import api from "../api/talentiq";
@@ -17,7 +17,11 @@ import type { Candidate } from "../types/search";
 
 function Dashboard() {
   const [results, setResults] = useState<Candidate[]>([]);
+  const [selectedCandidate, setSelectedCandidate] =
+    useState<Candidate | null>(null);
 
+const [dialogOpen, setDialogOpen] =
+    useState(false);
   const handleSearch = async (
   query: string,
   topK: number,
@@ -36,6 +40,7 @@ function Dashboard() {
   open_to_work: openToWork,
 });
 
+
       console.log(response.data.results);
 
       setResults(response.data.results);
@@ -43,7 +48,12 @@ function Dashboard() {
       console.error(error);
     }
   };
-
+  const handleViewProfile = (
+    candidate: Candidate
+) => {
+    setSelectedCandidate(candidate);
+    setDialogOpen(true);
+};
   return (
     <>
       <AppBar position="static">
@@ -112,12 +122,18 @@ function Dashboard() {
 
             {results.map((candidate) => (
               <CandidateCard
-                key={candidate.candidate_id}
-                candidate={candidate}
-              />
+    key={candidate.candidate_id}
+    candidate={candidate}
+    onViewProfile={handleViewProfile}
+/>
             ))}
           </Box>
         </Paper>
+        <CandidateDialog
+    open={dialogOpen}
+    onClose={() => setDialogOpen(false)}
+    candidate={selectedCandidate}
+/>
       </Container>
     </>
   );
