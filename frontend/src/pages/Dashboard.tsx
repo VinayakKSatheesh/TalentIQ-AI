@@ -22,6 +22,9 @@ import EmptyState from "../components/EmptyState";
 import api from "../api/talentiq";
 
 import type { Candidate } from "../types/search";
+import { exportCandidatesCSV } from "../utils/exportCsv";
+import DownloadIcon from "@mui/icons-material/Download";
+import { Button } from "@mui/material";
 
 function Dashboard() {
   const [results, setResults] = useState<Candidate[]>([]);
@@ -146,7 +149,23 @@ return (
                     {results.length > 0 && (
             <DashboardStats results={results} />
           )}
-
+          <Box
+  sx={{
+    mt: 3,
+    display: "flex",
+    justifyContent: "flex-end",
+  }}
+>
+  <Button
+    variant="contained"
+    color="success"
+    startIcon={<DownloadIcon />}
+    disabled={results.length === 0}
+    onClick={() => exportCandidatesCSV(results)}
+  >
+    Export CSV
+  </Button>
+</Box>
           <Alert
             severity="info"
             sx={{
