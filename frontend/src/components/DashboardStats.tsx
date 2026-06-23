@@ -1,5 +1,5 @@
 import {
-  Grid,
+  Box,
   Paper,
   Typography,
 } from "@mui/material";
@@ -16,86 +16,95 @@ interface Props {
 }
 
 function DashboardStats({ results }: Props) {
-  const totalCandidates = results.length;
+  const total = results.length;
 
-  const aiAnalyzed = results.filter(
+  const analysed = results.filter(
     (c) => c.ai_analysis
   ).length;
 
-  const openToWork = results.filter(
+  const open = results.filter(
     (c) => c.open_to_work
   ).length;
 
-  const avgMatch =
-    results.length === 0
+  const average =
+    total === 0
       ? 0
       : (
           results.reduce(
             (sum, c) => sum + c.final_score,
             0
-          ) /
-          results.length
+          ) / total
         ) * 100;
 
-  const stats = [
+  const cards = [
     {
       title: "Candidates",
-      value: totalCandidates,
+      value: total,
       icon: <GroupsIcon color="primary" />,
     },
     {
       title: "AI Analysed",
-      value: aiAnalyzed,
+      value: analysed,
       icon: <PsychologyIcon color="secondary" />,
     },
     {
-      title: "Avg Match",
-      value: `${avgMatch.toFixed(1)}%`,
+      title: "Average Match",
+      value: `${average.toFixed(1)}%`,
       icon: <StarIcon color="warning" />,
     },
     {
       title: "Open to Work",
-      value: openToWork,
+      value: open,
       icon: <WorkIcon color="success" />,
     },
   ];
 
   return (
-    <Grid container spacing={3} sx={{ mb: 4 }}>
-      {stats.map((stat) => (
-        <Grid
-          key={stat.title}
-          size={{ xs: 12, sm: 6, md: 3 }}
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: {
+          xs: "1fr",
+          sm: "1fr 1fr",
+          md: "repeat(4, 1fr)",
+        },
+        gap: 3,
+        mb: 4,
+      }}
+    >
+      {cards.map((card) => (
+        <Paper
+          key={card.title}
+          elevation={3}
+          sx={{
+            p: 3,
+            borderRadius: 3,
+            textAlign: "center",
+            transition: "0.25s",
+            "&:hover": {
+              transform: "translateY(-4px)",
+              boxShadow: 8,
+            },
+          }}
         >
-          <Paper
-            elevation={3}
+          {card.icon}
+
+          <Typography
+            variant="h4"
             sx={{
-              p: 3,
-              borderRadius: 3,
-              textAlign: "center",
+              fontWeight: 700,
+              mt: 1,
             }}
           >
-            {stat.icon}
+            {card.value}
+          </Typography>
 
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: 700,
-                mt: 1,
-              }}
-            >
-              {stat.value}
-            </Typography>
-
-            <Typography
-              color="text.secondary"
-            >
-              {stat.title}
-            </Typography>
-          </Paper>
-        </Grid>
+          <Typography color="text.secondary">
+            {card.title}
+          </Typography>
+        </Paper>
       ))}
-    </Grid>
+    </Box>
   );
 }
 

@@ -15,6 +15,7 @@ import CandidateCard from "../components/CandidateCard";
 import api from "../api/talentiq";
 import type { Candidate } from "../types/search";
 import DashboardStats from "../components/DashboardStats";
+import EmptyState from "../components/EmptyState";
 function Dashboard() {
   const [results, setResults] = useState<Candidate[]>([]);
   const [loading, setLoading] = useState(false);
@@ -132,13 +133,17 @@ const [dialogOpen, setDialogOpen] =
     </Typography>
 )}
 
-            {results.map((candidate) => (
-              <CandidateCard
-    key={candidate.candidate_id}
-    candidate={candidate}
-    onViewProfile={handleViewProfile}
-/>
-            ))}
+            {results.length === 0 && !loading ? (
+    <EmptyState />
+) : (
+    results.map((candidate) => (
+        <CandidateCard
+            key={candidate.candidate_id}
+            candidate={candidate}
+            onViewProfile={handleViewProfile}
+        />
+    ))
+)}
           </Box>
         </Paper>
         <CandidateDialog
