@@ -20,7 +20,7 @@ pandas
 # Progress
 tqdm
 
-# Env
+# Environment Variables
 python-dotenv
 
 # LLM
@@ -34,3 +34,6 @@ joblib
 
 # Testing
 pytest
+
+# HTTP Client
+httpx
