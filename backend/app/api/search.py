@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from fastapi import APIRouter
@@ -11,10 +12,23 @@ router = APIRouter(
 )
 
 ROOT = Path(__file__).resolve().parent.parent.parent
+INDEX_PATH = Path(
+    os.getenv(
+        "INDEX_PATH",
+        str(ROOT / "data" / "indexes" / "candidate_index.faiss"),
+    )
+)
+
+METADATA_PATH = Path(
+    os.getenv(
+        "METADATA_PATH",
+        str(ROOT / "data" / "metadata" / "candidate_metadata.db"),
+    )
+)
 
 service = SearchService(
-    index_path=ROOT / "data" / "indexes" / "candidate_index.faiss",
-    metadata_path=ROOT / "data" / "metadata" / "candidate_metadata.db",
+    index_path=INDEX_PATH,
+    metadata_path=METADATA_PATH,
 )
 
 

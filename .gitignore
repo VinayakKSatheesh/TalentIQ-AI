@@ -37,10 +37,16 @@ build/
 # Dataset cache
 *.pkl
 
+# Dataset
 dataset/*
 !dataset/.gitkeep
+
+# Ignore generated FAISS indexes
 backend/data/indexes/
-backend/data/metadata/
+
+# Track metadata database
+!backend/data/metadata/
+!backend/data/metadata/candidate_metadata.db
 
 # Python
 .venv/
@@ -50,9 +56,6 @@ __pycache__/
 # Environment
 .env
 
-# Vector indexes
-backend/indexes/
-backend/metadata/
 
 # React
 node_modules/
