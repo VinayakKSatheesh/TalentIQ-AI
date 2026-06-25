@@ -17,9 +17,10 @@ index_path = Path(
     )
 )
 
-from app.utils.download_index import download_index_if_missing
+
 
 download_index_if_missing()
+from app.utils.download_index import download_index_if_missing
 app = FastAPI(
     title="TalentIQ AI",
     version="1.0.0",

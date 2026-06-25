@@ -26,11 +26,21 @@ METADATA_PATH = Path(
     )
 )
 
-service = SearchService(
-    index_path=INDEX_PATH,
-    metadata_path=METADATA_PATH,
-)
+service = None
 
+def get_service():
+    global service
+    if service is None:
+        service = SearchService(
+            index_path=INDEX_PATH,
+            metadata_path=METADATA_PATH,
+        )
+    return service
+@router.post("")
+def search(request: SearchRequest):
+    service = get_service()
+    results = service.search(request)
+    ...
 
 @router.post("")
 def search(request: SearchRequest):
