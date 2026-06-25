@@ -25,7 +25,7 @@ def download_index_if_missing(index_path: Path):
         return
 
     url = os.getenv("INDEX_URL")
-
+    
     if not url:
         raise RuntimeError("INDEX_URL environment variable is missing.")
 
