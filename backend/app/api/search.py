@@ -40,12 +40,7 @@ def get_service():
 def search(request: SearchRequest):
     service = get_service()
     results = service.search(request)
-    ...
-
-@router.post("")
-def search(request: SearchRequest):
-
-    results = service.search(request)
+    
 
     from app.models.search_response import SearchResponse
     from app.models.search_result import SearchResult
