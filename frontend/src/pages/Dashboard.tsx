@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Container,
   Paper,
@@ -25,6 +23,7 @@ import type { Candidate } from "../types/search";
 import { exportCandidatesCSV } from "../utils/exportCsv";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Button } from "@mui/material";
+import logo from "../assets/logo.png";
 
 function Dashboard() {
   const [results, setResults] = useState<Candidate[]>([]);
@@ -102,21 +101,76 @@ function Dashboard() {
 
 return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography
-            variant="h5"
-            sx={{ fontWeight: 700 }}
-          >
-            TalentIQ AI
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    
 
       <Container
         maxWidth="lg"
-        sx={{ mt: 4 }}
+        sx={{ mt: 4}}
+        
       >
+        <Box
+  sx={{
+    mb: 4,
+    p: 6,
+    borderRadius: 5,
+    background:
+"linear-gradient(135deg,#141E30 0%,#243B55 45%,#1DB954 100%)",
+    color: "white",
+    textAlign: "center",
+    boxShadow: "0 15px 40px rgba(232, 235, 238, 0.35)",
+    border: "1px solid rgba(255,255,255,0.15)",
+  }}
+>
+
+  <Box
+  sx={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 0,
+    mb: 1,
+  }}
+>
+  <Box
+    component="img"
+    src={logo}
+    alt="TalentIQ AI Logo"
+    sx={{
+      width: 150,
+      height: 150,
+      objectFit: "contain",
+    }}
+  />
+
+  <Typography
+    variant="h3"
+    sx={{
+      fontWeight: 700,
+    }}
+  >TalentIQ{" "}
+    <Box
+      component="span"
+      sx={{
+        color: "#FFD54F",
+      }}
+    >
+      AI
+    </Box>
+  </Typography>
+</Box>
+
+  <Typography
+    variant="h6"
+    sx={{
+      opacity: 0.95,
+      mb: 2, 
+    }}
+  >
+    AI-Powered Recruitment Intelligence Platform
+  </Typography>
+
+  
+</Box>
         <Paper
           elevation={4}
           sx={{
@@ -125,20 +179,21 @@ return (
           }}
         >
           <Typography
-            variant="h3"
-            sx={{
-              fontWeight: 700,
-            }}
-          >
-            Recruiter Dashboard
-          </Typography>
+  variant="h4"
+  sx={{
+    fontWeight: 700,
+    mb: 1,
+  }}
+>
+  Recruiter Dashboard
+</Typography>
 
-          <Typography
-            color="text.secondary"
-            sx={{ mt: 1 }}
-          >
-            AI-powered candidate search
-          </Typography>
+<Typography
+  color="text.secondary"
+  sx={{ mb: 3 }}
+>
+  Search, analyze and compare candidates with AI assistance.
+</Typography>
 
           <Box sx={{ mt: 4 }}>
             <SearchBar

@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import {
   Dialog,
   DialogTitle,
@@ -12,7 +14,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 
 import type { Candidate } from "../types/search";
-
+import { exportCandidatePDF } from "../utils/exportPdf";
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -97,11 +99,11 @@ function CandidateDialog({
             <Typography sx={{ mb: 3 }}>
               {candidate.ai_analysis.recommendation}
             </Typography>
-
             <Typography
               sx={{ fontWeight: 700,    
                     mb: 1 }}
             >
+  
               Strengths
             </Typography>
 
@@ -144,7 +146,23 @@ function CandidateDialog({
                 />
               ))}
             </Stack>
-
+            <Button
+  variant="contained"
+  size="large"
+  sx={{
+    mt: 4,
+    borderRadius: 3,
+    px: 4,
+    textTransform: "none",
+    fontWeight: 700,
+  }}
+  color="error"
+  startIcon={<PictureAsPdfIcon />}
+   
+  onClick={() => exportCandidatePDF(candidate)}
+>
+  Download PDF Report
+</Button>
           </>
         )}
 

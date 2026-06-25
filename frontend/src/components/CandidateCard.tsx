@@ -16,7 +16,7 @@ import ScheduleIcon from "@mui/icons-material/Schedule";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-
+import Avatar from "@mui/material/Avatar";
 import type { Candidate } from "../types/search";
 interface Props {
   candidate: Candidate;
@@ -41,23 +41,86 @@ function CandidateCard({
   }}
 >
       <CardContent>
-
-        <Typography
-  variant="h5"
+      <Box
   sx={{
-    fontWeight: 700,
-    mb: 1,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mb: 2,
   }}
 >
-  {candidate.headline}
-</Typography>
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      
+    }}
+  >
+    <Avatar
+      sx={{
+        bgcolor: "#1976D2",
+        width: 56,
+        height: 56,
+        fontWeight: 700,
+      }}
+    >
+      {candidate.headline
+        .split(" ")
+        .slice(0, 2)
+        .map((w) => w[0])
+        .join("")}
+    </Avatar>
 
-<Typography
-  color="text.secondary"
-  sx={{ mb: 2 }}
+    <Box
+  sx={{
+    flex: 1,
+    textAlign: "center",
+  }}
 >
-  {candidate.candidate_id}
-</Typography>
+  <Typography
+    variant="h5"
+    sx={{
+      fontWeight: 700,
+      mb: 0.5,
+    }}
+  >
+    {candidate.headline}
+  </Typography>
+
+  <Typography
+    color="text.secondary"
+    sx={{
+      mb: 1,
+      fontSize: "0.95rem",
+    }}
+  >
+    Candidate ID: {candidate.candidate_id}
+  </Typography>
+
+  <Chip
+    label={
+      candidate.final_score >= 0.9
+        ? "Excellent Match"
+        : candidate.final_score >= 0.75
+        ? "Strong Match"
+        : "Good Match"
+    }
+    color={
+      candidate.final_score >= 0.9
+        ? "success"
+        : candidate.final_score >= 0.75
+        ? "primary"
+        : "warning"
+    }
+    sx={{
+      fontWeight: 700,
+      px: 1,
+    }}
+  />
+</Box>
+  </Box>
+  </Box>      
 
 <Typography
   variant="subtitle2"
@@ -73,9 +136,11 @@ function CandidateCard({
   variant="determinate"
   value={candidate.final_score * 100}
   sx={{
-    height: 10,
-    borderRadius: 5,
-    mb: 2,
+    height:12,
+borderRadius:6,
+"& .MuiLinearProgress-bar": {
+  borderRadius: 6,
+},
   }}
 />
 
@@ -140,10 +205,20 @@ function CandidateCard({
       AI Recommendation
     </Typography>
 
-    <Typography sx={{ mb: 2 }}>
-      {candidate.ai_analysis.recommendation}
-    </Typography>
-
+    <Box
+  sx={{
+    p: 2,
+    backgroundColor: "#F5F9FF",
+    borderLeft: "5px solid #1976D2",
+    borderRadius: 2,
+    mb: 3,
+  }}
+>
+  <Typography>
+    {candidate.ai_analysis.recommendation}
+  </Typography>
+</Box>
+      
     <Typography
       sx={{
         fontWeight: 700,
