@@ -4,9 +4,6 @@
 
 <h1 align="center">TalentIQ-AI</h1>
 
-<p align="center">
-AI-Powered Recruitment Platform
-</p>
 
 <p align="center">
 <a href="https://talent-iq-ai.vercel.app/">
@@ -18,8 +15,6 @@ AI-Powered Recruitment Platform
 </a>
 </p>
 
-
-# TalentIQ-AI 🤖
 
 <div align="center">
 
