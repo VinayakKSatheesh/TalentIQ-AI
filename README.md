@@ -9,7 +9,7 @@ AI-Powered Recruitment Platform
 </p>
 
 <p align="center">
-<a href="https://your-demo-url.com">
+<a href="https://talent-iq-ai.vercel.app/">
 <img src="https://img.shields.io/badge/🚀%20Live%20Demo-0A84FF?style=for-the-badge">
 </a>
 
@@ -18,14 +18,7 @@ AI-Powered Recruitment Platform
 </a>
 </p>
 
-<p align="center">
-<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python">
-<img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi">
-<img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react">
-<img src="https://img.shields.io/badge/FAISS-4B0082?style=flat-square">
-<img src="https://img.shields.io/badge/SentenceTransformers-FF6B6B?style=flat-square">
-<img src="https://img.shields.io/badge/Groq-000000?style=flat-square">
-</p>
+
 # TalentIQ-AI 🤖
 
 <div align="center">
@@ -34,7 +27,6 @@ AI-Powered Recruitment Platform
 
 *Discover the right talent through AI-driven semantic search, intelligent ranking, and explainable candidate analysis.*
 
-**Live Demo:** https://talent-iq-ai.vercel.app/
 
 **Backend API:** https://talentiq-ai.up.railway.app/
 
