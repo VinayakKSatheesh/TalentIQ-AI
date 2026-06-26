@@ -334,31 +334,31 @@ INDEX_URL=https://huggingface.co/datasets/VinayakKSatheesh/talentiq-ai-assets/re
 
 ### Home Page
 
-![Home](docs/images/home.png)
+![Home](docs/images/home.PNG)
 
 ---
 
 ### Semantic Search
 
-![Search](docs/images/search.png)
+![Search](docs/images/search.PNG)
 
 ---
 
 ### Candidate Results
 
-![Results](docs/images/results.png)
+![Results](docs/images/results.PNG)
 
 ---
 
 ### AI Candidate Analysis
 
-![Analysis](docs/images/analysis.png)
+![Analysis](docs/images/analysis.PNG)
 
 ---
 
 ### Candidate Profile
 
-![Candidate](docs/images/candidate.png)
+![Candidate](docs/images/candidate.PNG)
 
 ---
 
