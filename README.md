@@ -1,3 +1,31 @@
+<p align="center">
+  <img src="assets/banner.png" alt="TalentIQ-AI Banner" width="100%">
+</p>
+
+<h1 align="center">TalentIQ-AI</h1>
+
+<p align="center">
+AI-Powered Recruitment Platform
+</p>
+
+<p align="center">
+<a href="https://your-demo-url.com">
+<img src="https://img.shields.io/badge/🚀%20Live%20Demo-0A84FF?style=for-the-badge">
+</a>
+
+<a href="https://github.com/VinayakKSatheesh/TalentIQ-AI">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
+</a>
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python">
+<img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi">
+<img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react">
+<img src="https://img.shields.io/badge/FAISS-4B0082?style=flat-square">
+<img src="https://img.shields.io/badge/SentenceTransformers-FF6B6B?style=flat-square">
+<img src="https://img.shields.io/badge/Groq-000000?style=flat-square">
+</p>
 # TalentIQ-AI 🤖
 
 <div align="center">
