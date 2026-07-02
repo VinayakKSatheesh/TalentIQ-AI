@@ -10,14 +10,9 @@ router = APIRouter(
     tags=["Candidate"],
 )
 
-ROOT = Path(__file__).resolve().parent.parent.parent.parent
+from app.utils.download_index import DATASET_PATH
 
-DATASET_PATH = Path(
-    os.getenv(
-        "DATASET_PATH",
-        str(ROOT / "dataset" / "candidates.jsonl"),
-    )
-)
+service = ProfileService(DATASET_PATH)
 
 service = ProfileService(DATASET_PATH)
 
