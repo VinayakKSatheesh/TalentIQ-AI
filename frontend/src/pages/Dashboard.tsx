@@ -13,7 +13,7 @@ import MuiAlert from "@mui/material/Alert";
 
 import SearchBar from "../components/SearchBar";
 import CandidateCard from "../components/CandidateCard";
-import CandidateDialog from "../components/CandidateDialog";
+
 import DashboardStats from "../components/DashboardStats";
 import EmptyState from "../components/EmptyState";
 
@@ -26,13 +26,12 @@ import { Button } from "@mui/material";
 import logo from "../assets/logo.png";
 
 function Dashboard() {
-  const [results, setResults] = useState<Candidate[]>([]);
+  const [results, setResults] = useState<Candidate[]>(() => {
+  const saved = sessionStorage.getItem("searchResults");
+
+  return saved ? JSON.parse(saved) : [];
+});
   const [loading, setLoading] = useState(false);
-
-  const [selectedCandidate, setSelectedCandidate] =
-    useState<Candidate | null>(null);
-
-  const [dialogOpen, setDialogOpen] = useState(false);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -60,7 +59,10 @@ function Dashboard() {
       });
 
       setResults(response.data.results);
-
+      sessionStorage.setItem(
+  "searchResults",
+  JSON.stringify(response.data.results)
+);
       setSnackbarSeverity("success");
       setSnackbarMessage(
         `Found ${response.data.results.length} candidate(s).`
@@ -92,12 +94,6 @@ function Dashboard() {
     }
   };
 
-  const handleViewProfile = (
-    candidate: Candidate
-  ) => {
-    setSelectedCandidate(candidate);
-    setDialogOpen(true);
-  };
 
 return (
     <>
@@ -253,18 +249,13 @@ return (
                 <CandidateCard
                   key={candidate.candidate_id}
                   candidate={candidate}
-                  onViewProfile={handleViewProfile}
                 />
               ))
             )}
           </Box>
         </Paper>
 
-        <CandidateDialog
-          open={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          candidate={selectedCandidate}
-        />
+      
       </Container>
             <Snackbar
         open={snackbarOpen}

@@ -386,7 +386,7 @@ The following features are planned for future releases:
 
 * Authentication & Role-Based Access Control
 * Resume Upload & Parsing (PDF/DOCX)
-* Candidate Bookmarking
+* Hybrid Search using Candidate Skills
 * Advanced Recruiter Dashboard
 * Analytics & Hiring Insights
 * Multi-language Search

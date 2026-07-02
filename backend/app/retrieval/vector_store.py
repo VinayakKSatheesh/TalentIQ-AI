@@ -19,7 +19,8 @@ class VectorStore:
         """
         Add embeddings to the index.
         """
-        embeddings = embeddings.astype(np.float32)
+        if embeddings.dtype != np.float32:
+            embeddings = embeddings.astype(np.float32)
         self.index.add(embeddings)
 
     def search(self, embedding: np.ndarray, top_k: int = 10):

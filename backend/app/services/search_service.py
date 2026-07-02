@@ -41,9 +41,12 @@ class SearchService:
         """
 
         # Semantic Search
+        # Semantic Search
+        fetch_k = max(request.top_k * 10, 100)
+
         candidates = self.search_engine.search(
             query=request.query,
-            top_k=100,
+            top_k=fetch_k,
         )
 
         # Metadata Filtering

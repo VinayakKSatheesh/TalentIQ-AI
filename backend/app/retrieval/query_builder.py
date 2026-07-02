@@ -1,6 +1,6 @@
 class QueryBuilder:
     """
-    Builds a structured semantic query for embedding.
+    Builds a recruiter-focused semantic query for embedding.
     """
 
     @staticmethod
@@ -11,10 +11,18 @@ Recruiter Search Request
 Target Role:
 {query}
 
-Find candidates with relevant experience, technical skills,
-career history, backend engineering knowledge, software
-development expertise, API development experience and matching
-professional qualifications.
+Prioritize candidates who demonstrate:
 
-Return the best matching candidates.
+- Relevant production experience
+- Strong technical skills aligned with the role
+- End-to-end project ownership
+- Career progression and impact
+- Practical problem-solving ability
+- Modern software engineering practices
+- Product-company or real-world engineering experience
+- Strong communication and collaboration
+- High likelihood of responding to recruiters
+- Recent platform activity and hiring availability
+
+Return candidates whose overall experience and career history best match the intent of this hiring request, not just candidates with matching keywords.
 """.strip()

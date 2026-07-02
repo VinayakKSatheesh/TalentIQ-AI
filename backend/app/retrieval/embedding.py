@@ -46,13 +46,14 @@ class EmbeddingService:
 
         embeddings = EmbeddingService._model.encode(
             texts,
+            batch_size=128,            # or 64 if you prefer
             normalize_embeddings=True,
             convert_to_numpy=True,
-            show_progress_bar=False
+            convert_to_tensor=False,
+            show_progress_bar=False,
         )
 
         return embeddings.astype(np.float32)
-
     def dimension(self):
 
-        return EmbeddingService._model.get_sentence_embedding_dimension()
+            return EmbeddingService._model.get_sentence_embedding_dimension()

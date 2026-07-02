@@ -6,6 +6,29 @@ class MetadataFilter:
     Applies recruiter filters after semantic retrieval.
     """
 
+    ROLE_KEYWORDS = {
+        "ai": [
+            "ai",
+            "artificial intelligence",
+            "machine learning",
+            "ml",
+            "llm",
+            "nlp",
+            "rag",
+            "vector",
+            "embedding",
+            "langchain",
+            "langgraph",
+            "genai",
+            "pytorch",
+            "tensorflow",
+            "deep learning",
+            "computer vision",
+            "data scientist",
+            "mlops",
+        ]
+    }
+
     def filter(
         self,
         candidates: list[dict],
@@ -13,6 +36,13 @@ class MetadataFilter:
     ) -> list[dict]:
 
         filtered = []
+
+        query = request.query.lower()
+
+        role_keywords = []
+
+        if any(word in query for word in ["ai", "machine learning", "ml", "llm", "genai"]):
+            role_keywords = self.ROLE_KEYWORDS["ai"]
 
         for candidate in candidates:
 
@@ -36,6 +66,13 @@ class MetadataFilter:
                 and candidate["open_to_work"] != request.open_to_work
             ):
                 continue
+
+            # Role relevance
+            if role_keywords:
+                headline = candidate["headline"].lower()
+
+                if not any(keyword in headline for keyword in role_keywords):
+                    continue
 
             filtered.append(candidate)
 

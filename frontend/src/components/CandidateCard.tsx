@@ -18,15 +18,17 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import Avatar from "@mui/material/Avatar";
 import type { Candidate } from "../types/search";
+import { useNavigate } from "react-router-dom";
+
 interface Props {
   candidate: Candidate;
-  onViewProfile: (candidate: Candidate) => void;
+
 }
 
 function CandidateCard({
   candidate,
-  onViewProfile,
 }: Props) {
+  const navigate = useNavigate();
   return (
     <Card
   elevation={4}
@@ -68,7 +70,7 @@ function CandidateCard({
       {candidate.headline
         .split(" ")
         .slice(0, 2)
-        .map((w) => w[0])
+        .map((w: string) => w[0])
         .join("")}
     </Avatar>
 
@@ -287,9 +289,20 @@ borderRadius:6,
       <Button
     variant="contained"
     size="medium"
-    onClick={() => onViewProfile(candidate)}
+    onClick={() =>
+        navigate(
+            `/candidate/${candidate.candidate_id}`,
+            {
+                state: {
+                    similarity_score: candidate.similarity_score,
+                    business_score: candidate.business_score,
+                    final_score: candidate.final_score,
+                },
+            }
+        )
+    }
 >
-    View Full Profile
+    Open Profile
 </Button>
     </Box>
   </>

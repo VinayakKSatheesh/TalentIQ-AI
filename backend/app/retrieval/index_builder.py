@@ -48,14 +48,15 @@ class IndexBuilder:
         dataset_path: Path,
         index_path: Path,
         metadata_path: Path,
-        batch_size: int = 64,
+        batch_size: int = 128,
+        rebuild_vectors: bool = True, 
     ) -> None:
 
         self.dataset_path = dataset_path
         self.index_path = index_path
         self.metadata_path = metadata_path
         self.batch_size = batch_size
-
+        
         logger.info("Initializing embedding service...")
         self.embedding = EmbeddingService()
 
@@ -70,6 +71,7 @@ class IndexBuilder:
         )
 
         self.vector_id = 0
+        self.rebuild_vectors = rebuild_vectors
     def process_batch(
         self,
         candidates: list[Candidate]
@@ -92,12 +94,13 @@ class IndexBuilder:
             build_candidate_document(candidate)
             for candidate in candidates
         ]
+        if self.rebuild_vectors:
+            # Generate embeddings
+            embeddings = self.embedding.embed_batch(documents)
 
-        # Generate embeddings
-        embeddings = self.embedding.embed_batch(documents)
+            # Add vectors to FAISS
+            self.vector_store.add(embeddings)
 
-        # Add vectors to FAISS
-        self.vector_store.add(embeddings)
 
         # Store metadata
         for candidate in candidates:
@@ -141,9 +144,9 @@ class IndexBuilder:
             if batch:
                 self.process_batch(batch)
 
-            logger.info("Saving FAISS index...")
-
-            self.vector_store.save(self.index_path)
+            if self.rebuild_vectors:
+                logger.info("Saving FAISS index...")
+                self.vector_store.save(self.index_path)
 
             logger.info("Saving metadata database...")
 

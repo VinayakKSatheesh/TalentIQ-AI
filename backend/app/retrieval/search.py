@@ -4,6 +4,7 @@ from app.retrieval.embedding import EmbeddingService
 from app.retrieval.vector_store import VectorStore
 from app.retrieval.metadata_store import MetadataStore
 from app.retrieval.query_builder import QueryBuilder
+from app.ranking.hybrid import HybridSearch
 
 class SearchEngine:
     """
@@ -21,6 +22,7 @@ class SearchEngine:
         self.vector_store = VectorStore.load(index_path)
 
         self.metadata_store = MetadataStore(metadata_path)
+        self.hybrid_search = HybridSearch()
     def search(
         self,
         query: str,
@@ -61,4 +63,4 @@ class SearchEngine:
 
             results.append(candidate)
 
-        return results
+        return self.hybrid_search.rerank(results)

@@ -10,3 +10,7 @@ const api = axios.create({
 });
 
 export default api;
+export const getCandidateProfile = async (candidateId: string) => {
+    const response = await api.get(`/candidate/${candidateId}`);
+    return response.data;
+};

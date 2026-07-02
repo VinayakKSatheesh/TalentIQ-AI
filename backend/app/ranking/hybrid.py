@@ -14,14 +14,25 @@ class HybridSearch:
         candidates: list[dict],
     ) -> list[dict]:
         """
-        Apply business scoring and sort candidates.
+        Combine semantic similarity with business scoring
+        and return the final ranked candidates.
         """
 
         ranked = []
 
         for candidate in candidates:
+            business_score = self.scorer.score(candidate)
 
-            candidate["final_score"] = self.scorer.score(candidate)
+            candidate["business_score"] = business_score
+
+            # Normalize business score to 0–1
+            normalized_business = min(business_score / 0.25, 1.0)
+
+            candidate["final_score"] = round(
+                (candidate["similarity_score"] * 0.80)
+                + (normalized_business * 0.20),
+                4,
+            )
 
             ranked.append(candidate)
 
